@@ -5,8 +5,10 @@ export const Home = () => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
-        actions.loadData();
-    }, []);
+        if (actions.loadData) {
+            actions.loadData();  // Llamada correcta al fetch de datos
+        }
+    }, [actions]);
 
     const Card = ({ item, type }) => (
         <div className="card" style={{ width: "18rem" }}>
@@ -24,9 +26,8 @@ export const Home = () => {
                     Add to Favorites
                 </button>
                 <a href={`/details/${type}/${item.uid}`} className="btn btn-secondary ms-2">
-    				Learn more
-				</a>
-
+                    Learn more
+                </a>
             </div>
         </div>
     );
@@ -34,23 +35,37 @@ export const Home = () => {
     return (
         <div className="container">
             <h1>People</h1>
-            <div className="d-flex overflow-auto">
-                {store.people.map(item => (
-                    <Card key={item.uid} item={item} type="characters" />
-                ))}
-            </div>
+            {store.people.length === 0 ? (
+                <div className="loading">Loading...</div>
+            ) : (
+                <div className="card-container">
+                    {store.people.map(item => (
+                        <Card key={item.uid} item={item} type="people" />
+                    ))}
+                </div>
+            )}
+
             <h1>Vehicles</h1>
-            <div className="d-flex overflow-auto">
-                {store.vehicles.map(item => (
-                    <Card key={item.uid} item={item} type="vehicles" />
-                ))}
-            </div>
+            {store.vehicles.length === 0 ? (
+                <div className="loading">Loading...</div>
+            ) : (
+                <div className="card-container">
+                    {store.vehicles.map(item => (
+                        <Card key={item.uid} item={item} type="vehicles" />
+                    ))}
+                </div>
+            )}
+
             <h1>Planets</h1>
-            <div className="d-flex overflow-auto">
-                {store.planets.map(item => (
-                    <Card key={item.uid} item={item} type="planets" />
-                ))}
-            </div>
+            {store.planets.length === 0 ? (
+                <div className="loading">Loading...</div>
+            ) : (
+                <div className="card-container">
+                    {store.planets.map(item => (
+                        <Card key={item.uid} item={item} type="planets" />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
