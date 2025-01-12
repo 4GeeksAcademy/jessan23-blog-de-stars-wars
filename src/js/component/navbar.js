@@ -5,7 +5,7 @@ export const Navbar = () => {
     const { store, actions } = useContext(Context);
 
     return (
-        <nav className="navbar navbar-light bg-light">
+        <nav className="navbar navbar-dark bg-dark"> {/* Cambié 'bg-light' por 'bg-dark' */}
             <div className="container">
                 <a className="navbar-brand" href="/">Star Wars</a>
                 <div className="dropdown">

@@ -26,8 +26,9 @@ export const Home = () => {
                     Add to Favorites
                 </button>
                 <a href={`/details/${type}/${item.uid}`} className="btn btn-secondary ms-2">
-                    Learn more
-                </a>
+                 Learn more
+                 </a>
+
             </div>
         </div>
     );
@@ -35,12 +36,13 @@ export const Home = () => {
     return (
         <div className="container">
             <h1>People</h1>
+
             {store.people.length === 0 ? (
                 <div className="loading">Loading...</div>
             ) : (
                 <div className="card-container">
                     {store.people.map(item => (
-                        <Card key={item.uid} item={item} type="people" />
+                        <Card key={item.uid} item={item} type={"people"} />
                     ))}
                 </div>
             )}
