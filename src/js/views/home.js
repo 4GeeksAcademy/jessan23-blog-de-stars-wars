@@ -6,7 +6,7 @@ export const Home = () => {
 
     useEffect(() => {
         if (actions.loadData) {
-            actions.loadData();  // Llamada correcta al fetch de datos
+            actions.loadData(); 
         }
     }, [actions]);
 
