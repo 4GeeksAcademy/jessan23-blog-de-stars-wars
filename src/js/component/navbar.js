@@ -1,39 +1,40 @@
-import React, { useContext } from "react";
+
+
+
+                import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
+
 
 export const Navbar = () => {
-    const { store, actions } = useContext(Context);
+	const { store, actions } = useContext(Context);
 
-    return (
-        <nav className="navbar navbar-dark bg-dark"> 
-            <div className="container">
-                <a className="navbar-brand" href="/">Star Wars</a>
-                <div className="dropdown">
-                    <button
-                        className="btn btn-primary dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        Favorites ({store.favorites.length})
-                    </button>
-                    <ul className="dropdown-menu">
-                        {store.favorites.map((fav, index) => (
-                            <li key={index}>
-                                <span className="dropdown-item">
-                                    {fav.name}
-                                    <button
-                                        className="btn btn-danger btn-sm ms-2"
-                                        onClick={() => actions.removeFavorite(fav.uid)}
-                                    >
-                                        x
-                                    </button>
-                                </span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    );
+	useEffect(() => {
+		store.favorites;
+	}, []);
+
+
+	return (
+		<nav className="navbar navbar-light ps-3 galaxyBackground">
+			<Link to="/">
+				<img src="https://infonegocios.info/content/images/2023/10/24/415577/conversions/star-wars-impactmkt-medium-size.jpg" alt="" width="200" height="100" />
+			</Link>
+			<div className="ml-auto pe-3">
+				<div class="btn-group" role="group">
+					<button id="btnGroupDrop1" type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						Favorites
+					</button>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="btnGroupDrop1">
+						{store.favorites.length === 0 ? (
+							<li className="task-item">There're not favorites</li>
+						) : (
+							store.favorites.map((item) => (
+								<li class="d-flex" key={item.id}><a class="dropdown-item" href="#">{item.name}</a><button type="button" class="btn btn-light" onClick={() => { actions.deleteFavorite(item) }}><i class="fa-solid fa-trash"></i></button></li>
+							))
+						)}
+					</ul>
+				</div>
+			</div>
+		</nav>
+	);
 };
